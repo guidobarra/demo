@@ -1,0 +1,21 @@
+version: "3.6"
+
+services:
+
+  java_vertx_app:
+    image: java_vertx_app
+    container_name: java_vertx_app
+    hostname: java_vertx_app
+    #entrypoint: "sleep 15m"
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "9292:9292"
+    networks:
+      - network_app
+
+
+networks:
+  network_app:
+    name: network_app
