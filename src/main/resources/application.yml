@@ -1,3 +1,11 @@
 http:
   port: 9292
   host: "localhost"
+
+activemq:
+  #broker: "tcp://localhost:61616"
+  broker: "localhost"
+  port: 61616
+  topic: "demo.queue"
+  user: "gubaguba"
+  password: "gubaguba"

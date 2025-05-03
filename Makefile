@@ -9,6 +9,9 @@ docker_build:
 docker_deploy:
 	docker compose -f docker/docker-compose.yml --project-directory ./docker up -d
 
+docker_deploy_activemq:
+	docker compose -f docker/docker-compose-activemq.yml --project-directory ./docker up -d
+
 docker_stop:
 	docker compose -f docker/docker-compose.yml --project-directory ./docker down
 

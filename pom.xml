@@ -26,6 +26,7 @@
         <launcher.class>io.vertx.core.Launcher</launcher.class>
         <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
         <jackson.version>2.17.1</jackson.version>
+        <artemis.version>2.41.0</artemis.version>
     </properties>
 
     <dependencies>
@@ -54,22 +55,20 @@
             <version>${jackson.version}</version> <!-- O compatible con tu Vert.x -->
         </dependency>
 
-        <!-- LOMBOK -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-amqp-client</artifactId>
+            <version>${vertx.version}</version>
         </dependency>
 
-        <!-- SLF4J API (necesario para @Slf4j) -->
+        <!-- SLF4J API -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.9</version>
         </dependency>
 
-        <!-- Logback como backend para SLF4J (recomendado con Vert.x) -->
+        <!-- Logback (implementación de SLF4J) -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

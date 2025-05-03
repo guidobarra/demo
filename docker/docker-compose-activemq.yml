@@ -1,20 +1,6 @@
-version: "3.6"
+version: '3.8'
 
 services:
-
-  java_vertx_app:
-    image: java_vertx_app
-    container_name: java_vertx_app
-    hostname: java_vertx_app
-    #entrypoint: "sleep 15m"
-    build:
-      context: ../
-      dockerfile: ./docker/Dockerfile
-    ports:
-      - "9292:9292"
-    networks:
-      - network_app
-
   artemis:
     image: apache/activemq-artemis:latest-alpine
     container_name: artemis
@@ -31,14 +17,8 @@ services:
     volumes:
       - artemis_instance:/var/lib/artemis-instance
     restart: unless-stopped
-    networks:
-      - network_app
 
 volumes:
   artemis_instance:
     name: artemis_instance
     driver: local
-
-networks:
-  network_app:
-    name: network_app

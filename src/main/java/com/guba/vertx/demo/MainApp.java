@@ -2,19 +2,23 @@ package com.guba.vertx.demo;
 
 
 import com.guba.vertx.demo.configs.AppConfig;
-import com.guba.vertx.demo.routers.ArticleRouter;
-import com.guba.vertx.demo.services.ArticleService;
+import com.guba.vertx.demo.queues.Consumer;
+import com.guba.vertx.demo.queues.Producer;
+import com.guba.vertx.demo.routers.HealthCheckRouter;
 import io.vertx.core.Vertx;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
+
 public class MainApp {
+    private static final Logger LOG = LoggerFactory.getLogger(MainApp.class);
 
     public static void main(String[] args) {
-        log.info("Startup Main app");
+        LOG.info("Startup Main app");
         AppConfig.load("application.yml");
         Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new ArticleRouter());
-        vertx.deployVerticle(new ArticleService());
+        vertx.deployVerticle(new HealthCheckRouter());
+        vertx.deployVerticle(new Producer());
+        vertx.deployVerticle(new Consumer());
     }
 }
