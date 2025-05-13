@@ -3,7 +3,6 @@ package com.guba.vertx.demo;
 
 import com.guba.vertx.demo.configs.AppConfig;
 import com.guba.vertx.demo.queues.Consumer;
-import com.guba.vertx.demo.queues.Producer;
 import com.guba.vertx.demo.routers.HealthCheckRouter;
 import io.vertx.core.Vertx;
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ public class MainApp {
         AppConfig.load("application.yml");
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(new HealthCheckRouter());
-        vertx.deployVerticle(new Producer());
         vertx.deployVerticle(new Consumer());
     }
 }
