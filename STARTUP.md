@@ -177,10 +177,10 @@ Flags fijos incluidos en el `Dockerfile`:
 
 | Método | URL | Descripción |
 |--------|-----|-------------|
-| `GET` | `/health-check` | Health-check |
-| `GET` | `/api/users` | Listar usuarios |
+| `GET` | `/health-check/` | Health-check |
+| `GET` | `/api/users/` | Listar usuarios |
 | `GET` | `/api/users/:id` | Obtener usuario por ID |
-| `POST` | `/api/users` | Crear usuario |
+| `POST` | `/api/users/` | Crear usuario |
 | `PUT` | `/api/users/:id` | Actualizar usuario |
 | `DELETE` | `/api/users/:id` | Eliminar usuario |
 
@@ -189,13 +189,13 @@ Flags fijos incluidos en el `Dockerfile`:
 Health-check:
 
 ```bash
-curl http://localhost:9292/health-check
+curl http://localhost:9292/health-check/
 ```
 
 Listar usuarios:
 
 ```bash
-curl http://localhost:9292/api/users
+curl http://localhost:9292/api/users/
 ```
 
 Obtener usuario por ID:
@@ -207,7 +207,7 @@ curl http://localhost:9292/api/users/1
 Crear usuario:
 
 ```bash
-curl -X POST http://localhost:9292/api/users \
+curl -X POST http://localhost:9292/api/users/ \
   -H "Content-Type: application/json" \
   -d '{"name": "Juan", "email": "juan@mail.com"}'
 ```

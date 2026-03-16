@@ -17,8 +17,6 @@ import io.vertx.sqlclient.Pool;
 
 public class MainVerticle extends VerticleBase {
 
-  private Pool pool;
-
   @Override
   public Future<?> start() {
     return AppConfig.load(vertx)
@@ -26,7 +24,7 @@ public class MainVerticle extends VerticleBase {
   }
 
   private Future<?> bootstrap(JsonObject config) {
-    pool = DatabaseConfig.createPool(vertx, config);
+    Pool pool = DatabaseConfig.createPool(vertx, config);
 
     UserRepository userRepository = new UserRepository(pool);
     UserService userService = new UserService(userRepository);
