@@ -1,0 +1,49 @@
+services:
+
+  vertx-app:
+    image: vertx-app
+    container_name: vertx-app
+    hostname: vertx-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "9292:9292"
+    environment:
+      VERTX_PROFILE: beta
+      VERTX_DATABASE_HOST: mariadb
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - network_mariadb
+
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
+    hostname: mariadb
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: sales
+      MARIADB_USER: vertx
+      MARIADB_PASSWORD: vertx123
+    volumes:
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - network_mariadb
+
+volumes:
+  mariadb_data:
+
+networks:
+  network_mariadb:
+    name: network_mariadb
