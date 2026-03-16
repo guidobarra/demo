@@ -7,10 +7,14 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 
 public class AppConfig {
 
+  private static final Logger LOG = LoggerFactory.getLogger(AppConfig.class);
   private static final String ENV_PREFIX = "VERTX_";
 
   private AppConfig() {}
@@ -41,7 +45,7 @@ public class AppConfig {
 
     return retriever.getConfig()
       .map(AppConfig::applyEnvOverrides)
-      .onSuccess(cfg -> System.out.println("Config loaded [profile=" + profile + "]"));
+      .onSuccess(cfg -> LOG.info("Config loaded [profile={}]", profile));
   }
 
   /**

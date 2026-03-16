@@ -10,12 +10,18 @@ import com.guba.service.UserService;
 import io.vertx.core.Future;
 import io.vertx.core.VerticleBase;
 import io.vertx.core.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.management.ManagementFactory;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.validation.BadRequestException;
 import io.vertx.sqlclient.Pool;
 
 public class MainVerticle extends VerticleBase {
+
+  private static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
 
   @Override
   public Future<?> start() {
@@ -37,7 +43,7 @@ public class MainVerticle extends VerticleBase {
     return vertx.createHttpServer()
       .requestHandler(router)
       .listen(port)
-      .onSuccess(http -> System.out.println("HTTP server started on port " + http.actualPort()));
+      .onSuccess(http -> LOG.info("HTTP server started on port {} in {}ms", http.actualPort(), ManagementFactory.getRuntimeMXBean().getUptime()));
   }
 
   private Router buildRouter(UserHandler userHandler) {
