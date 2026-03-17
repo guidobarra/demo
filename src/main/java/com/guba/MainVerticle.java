@@ -5,6 +5,7 @@ import com.guba.config.DatabaseConfig;
 import com.guba.handler.UserHandler;
 import com.guba.repository.UserRepository;
 import com.guba.router.HealthCheckRouter;
+import com.guba.router.SwaggerRouter;
 import com.guba.router.UserRouter;
 import com.guba.service.UserService;
 import io.vertx.core.Future;
@@ -52,6 +53,7 @@ public class MainVerticle extends VerticleBase {
 
     router.route("/api/users/*").subRouter(UserRouter.create(vertx, userHandler));
     router.route("/health-check/*").subRouter(HealthCheckRouter.create(vertx, config));
+    router.route("/swagger/*").subRouter(SwaggerRouter.create(vertx));
 
     router.errorHandler(400, ctx -> {
       JsonObject error = new JsonObject().put("error", "Bad request");

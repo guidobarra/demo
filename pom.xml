@@ -69,6 +69,11 @@
       <artifactId>logback-classic</artifactId>
       <version>1.5.32</version>
     </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>swagger-ui</artifactId>
+      <version>5.30.1</version>
+    </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
@@ -96,6 +101,7 @@
         <filtering>true</filtering>
         <includes>
           <include>config/*.yaml</include>
+          <include>webroot/openapi.yaml</include>
         </includes>
       </resource>
       <resource>
@@ -103,6 +109,7 @@
         <filtering>false</filtering>
         <excludes>
           <exclude>config/*.yaml</exclude>
+          <exclude>webroot/openapi.yaml</exclude>
         </excludes>
       </resource>
     </resources>
